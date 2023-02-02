@@ -1,4 +1,3 @@
-
 import { useContext, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { UserContext } from '../components/UserContext';
@@ -17,6 +16,7 @@ export default function AccountPage() {
   }
   console.log(subpage);
 
+  // self explanatory function to handle logout 
   async function logout() {
     await axios.post('/logout');
     setDirect('/');

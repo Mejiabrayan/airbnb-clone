@@ -37,11 +37,31 @@ export default function PlacesPage() {
 
   async function addPhotoByLink(ev) {
     ev.preventDefault();
-    const {data:filename} =  await axios.post('/upload-by-link', { link: photoLink });
-    setAddedPhotos(prev => {
+    const { data: filename } = await axios.post('/upload-by-link', {
+      link: photoLink,
+    });
+    setAddedPhotos((prev) => {
       return [...prev, filename];
-    })
+    });
     setPhotoLink(''); // clear the input field after the photo is added
+  }
+
+  function uploadPhoto(ev) {
+    const files = ev.target.files;
+    const data = new FormData();
+    for(let i = 0; i < files.length; i++) {
+    data.append('photos', files[i]);
+    }
+    axios
+      .post('/upload', data, {
+        headers: { 'Content-type': 'multipart/form-data' },
+      })
+      .then((response) => {
+        const { data: filenames } = response;
+        setAddedPhotos((prev) => {
+          return [...prev, ...filenames];
+        });
+      });
   }
   return (
     <div>
@@ -96,29 +116,32 @@ export default function PlacesPage() {
                 onChange={(ev) => setPhotoLink(ev.target.value)}
                 className='max-w-sm'
                 type='text'
-                placeholder={'upload..'}
+                placeholder={'upload...'}
               />
-              <button 
-              onClick={addPhotoByLink} // addPhotoByLink is a function that will be called when the button is clicked
-              className='bg-gray-200 px-4 rounded-2xl w-auto '>
+              <button
+                onClick={addPhotoByLink}
+                className='bg-gray-200 px-4 rounded-2xl w-auto '
+              >
                 Add Photo{' '}
               </button>
             </div>
-            <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
-              {addedPhotos.length > 0 && addedPhotos.map((link) => {
-                return (
-                  <div className='relative'>
-                    <img
-                     src={'http://localhost:4000/uploads/' + link}
-                    />
-                    <button className='absolute top-0 right-0 bg-red-500 rounded-full w-6 h-6'>
-                      X
-                    </button>
-                  </div>
-                );
-              }
-              )}
-              <button className='flex gap-1 justify-center border bg-transparent rounded-2xl p-8 text-gray-600'>
+            <div className='grid gap-2 mt-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
+              {addedPhotos.length > 0 &&
+                addedPhotos.map((link) => {
+                  return (
+                    <div className='h-32 flex' key={link}>
+                      <img
+                        src={'http://localhost:4000/uploads/' + link}
+                        className='rounded-2xl w-full h-32 object-cover object-center'
+                      />
+                      <button className='absolute top-0 right-0 bg-red-500 rounded-full w-6 h-6'>
+                        X
+                      </button>
+                    </div>
+                  );
+                })}
+              <label className='h-32 cursor-pointer flex gap-1 items-center justify-center  border bg-transparent rounded-2xl p-2 text-gray-600'>
+                <input type='file' multiple className='hidden' onChange={uploadPhoto} />
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -134,7 +157,7 @@ export default function PlacesPage() {
                   />
                 </svg>
                 Upload
-              </button>
+              </label>
             </div>
             {preInput('Description', 'Description of your place.')}
             <textarea

@@ -1,10 +1,9 @@
 import { Link, Navigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
-
 import { UserContext } from '../components/UserContext';
 
-export default function Login() {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);

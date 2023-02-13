@@ -1,6 +1,3 @@
-// const { fontFamily } = require('tailwindcss/defaultTheme')
-
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./index.html",
@@ -9,13 +6,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Poppins', 'sans-serif']
+      },
       colors: {
-        primary:'#F5385D',
+        primary:'#FF5A5F',
       },
       plugins: [
         require('@tailwindcss/typography'),
       ],
+    }, fontSmoothing: {
+      body: {
+        '-webkit-font-smoothing': 'antialiased',
+        '-moz-osx-font-smoothing': 'grayscale',
+      }
     }
   }
 }
-  

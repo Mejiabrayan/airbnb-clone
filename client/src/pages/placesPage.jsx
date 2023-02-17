@@ -41,7 +41,7 @@ export default function PlacesPage() {
       <div className='flex flex-col items-center mt-5'>
         {places.length > 0 &&
           places.map((place) => (
-            <Link to={'/account/places/'+place_id} className='flex gap-4  bg-gray-200 p-2 rounded-2xl'>
+            <Link to={'/account/places/'+place._id} className='flex gap-4  bg-gray-200 p-2 rounded-2xl'>
               <div className='w-32 h-32 bg-gray-300 shrink-0'>
                 {place.photos.length > 0 && (
                   <img

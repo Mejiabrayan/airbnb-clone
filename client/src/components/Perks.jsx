@@ -1,17 +1,21 @@
 export default function Perks({ selected, onChange }) {
-  function handleClick (ev) {
-    const {checked, name} = ev.target;
-    if(checked.name) {
+  function handleClick(ev) {
+    const { checked, name } = ev.target;
+    if (checked.name) {
       onChange([...selected, name]);
     }
-    onChange([...selected.filter(selectedName => selectedName !== name)]);
+    onChange([...selected.filter((selectedName) => selectedName !== name)]);
   }
-
 
   return (
     <>
       <label className='border p-4 flex rounded-2xl gap-2 items-center mt-2'>
-        <input name='wifi' type='checkbox' onChange={handleClick } />
+        <input
+          checked={selected.includes('wifi')}
+          name='wifi'
+          type='checkbox'
+          onChange={handleClick}
+        />
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -32,7 +36,12 @@ export default function Perks({ selected, onChange }) {
 
       <label className='border p-4 flex rounded-2xl gap-2 items-center'>
         {' '}
-        <input name='parking' type='checkbox' onChange={handleClick } />
+        <input
+          checked={selected.includes('parking')}
+          name='parking'
+          type='checkbox'
+          onChange={handleClick}
+        />
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -51,7 +60,12 @@ export default function Perks({ selected, onChange }) {
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center'>
         {' '}
-        <input name='tv' type='checkbox' onChange={handleClick } />
+        <input
+          checked={selected.includes('tv')}
+          name='tv'
+          type='checkbox'
+          onChange={handleClick}
+        />
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -70,7 +84,12 @@ export default function Perks({ selected, onChange }) {
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center'>
         {' '}
-        <input name='pets' type='checkbox' onChange={handleClick } />
+        <input
+          checked={selected.includes('pets')}
+          name='pets'
+          type='checkbox'
+          onChange={handleClick}
+        />
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -88,16 +107,25 @@ export default function Perks({ selected, onChange }) {
         <span>Pets</span>
       </label>
       <label
-        name='laundry'
         className='border p-4 flex rounded-2xl gap-2 items-center'
       >
         {' '}
-        <input type='checkbox' onChange={handleClick } />
+        <input
+          checked={selected.includes('laundry')}
+          name='laundry'
+          type='checkbox'
+          onChange={handleClick}
+        />
         <span>Laundry</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center'>
         {' '}
-        <input name='AC' type='checkbox' onChange={handleClick } />
+        <input
+          checked={selected.includes('AC')}
+          name='AC'
+          type='checkbox'
+          onChange={handleClick}
+        />
         <span>AC</span>
       </label>
     </>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
+
 export default function PhotosUploader({ addedPhotos, onChange }) {
   const [photoLink, setPhotoLink] = useState('');
   async function addPhotoByLink(ev) {
@@ -34,6 +35,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
     ev.preventDefault();
     onChange([...addedPhotos.filter((photo) => photo !== filename)]);
   }
+  
   function selectAsMainPhoto(ev, filename) {
     ev.preventDefault();
     onChange([filename, ...addedPhotos.filter((photo) => photo !== filename)]);

@@ -1,11 +1,12 @@
 export default function Perks({ selected, onChange }) {
   function handleClick(ev) {
     const { checked, name } = ev.target;
-    if (checked.name) {
+    if (checked) {
       onChange([...selected, name]);
-    }
+    } else {
     onChange([...selected.filter((selectedName) => selectedName !== name)]);
   }
+}
 
   return (
     <>
